@@ -31,7 +31,13 @@ class GuessWord:
         GuessWord.turn += 1
 
     def is_valid(self):
-        return self.w_str in valid_words
+        if (self.w_str in valid_words):
+            return True
+        if (self.w_str == '-h'):
+            self.call_guesses()
+            return False
+        else:
+            return False
 
     def apply_yellows(self):
         for i, _ in enumerate(self.w_chars):
@@ -55,16 +61,18 @@ class GuessWord:
         GuessWord.past_guesses.append(self.post_guess_w_str)
         print(self.post_guess_w_str)
 
+    def call_guesses(self):
+        print('\n::.......::')
+        for element in GuessWord.past_guesses:
+            print(f':. {element} ::')
+        print('::.......::')
+
     def check_victory(self):
         if (self.w_str == CHOSEN_WORD or self.w_str == CHOSEN_WORD_RAW):
             print('::.:......................:.::')
             print(f'Parabéns!\nVocê venceu em {GuessWord.turn} tentativa(s)')
             print('::.:......................:.::')
-
-            print('\n::.......::')
-            for element in GuessWord.past_guesses:
-                print(f':. {element} ::')
-            print('::.......::')
+            self.call_guesses()
             sys.exit(1)
 
     def check_loss(self):
@@ -74,5 +82,5 @@ class GuessWord:
                 f'Acabaram as suas chances!\nA palavra era {CHOSEN_WORD_RAW}'
             )
             print('::.:......................:.::')
-
+            self.call_guesses()
             sys.exit(1)

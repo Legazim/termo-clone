@@ -14,7 +14,10 @@ begin_message = """\033[90m
 os.system('cls') if os.name == 'nt' else os.system('clear')
 
 print(begin_message.replace('#', f'{termo.Color.GREEN}#{termo.Color.GREY}'))
-# print(termo.CHOSEN_WORD_RAW)
+print(
+        f'digite{termo.Color.GREEN} -h {termo.Color.BASE} para ver palavras'
+    )
+print(termo.CHOSEN_WORD_RAW)
 
 if __name__ == '__main__':
     while True:
